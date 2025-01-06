@@ -2,7 +2,9 @@ const express = require("express");
 const snarkjs = require("snarkjs");
 const connectDB = require("./config/db");
 const Candidate = require("./models/CandidateModel.js");
-const verificationKey = require("./circuits/verification_key.json"); 
+const Voter = require("./models/VoterModel");
+const verificationKey = require("./circuits/verification_key.json");
+const path = require("path");
 
 const app = express()
 connectDB();
@@ -64,3 +66,18 @@ app.post("/vote", async (req, res) => {
         res.status(500).json({ success: false, message: "Lỗi máy chủ!" });
     }
 });
+
+app.get("/voters", async (req, res) => {
+    try {
+        // Lấy tất cả các cccdHash từ cơ sở dữ liệu
+        const voters = await Voter.find({}, { cccdHash: 1, _id: 0 }); // Chỉ lấy trường cccdHash
+
+        // Trả về danh sách cccdHash
+        return res.status(200).json(voters);
+    } catch (error) {
+        console.error("Lỗi khi truy vấn cơ sở dữ liệu:", error);
+        return res.status(500).json({ message: "Lỗi máy chủ!" });
+    }
+});
+
+app.use("/public", express.static(path.join(__dirname, "circuits")));
