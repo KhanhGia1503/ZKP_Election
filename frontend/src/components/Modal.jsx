@@ -39,11 +39,11 @@ const Modal = ({ voter, onClose }) => {
 
     // Lấy cccdHash tương ứng từ danh sách
     const cccdHash = cccdHashes[currentIndex];
-
+    console.log("Code run here now 2", cccdHash);
     try {
       // Gửi yêu cầu bầu cử và proof cho Circom
       const response = await postVote({ cccd, otp, cccdHash, candidateId: voter.id });
-      
+      console.log("I can see",response);
       if (response.success && response.isValid) {
         // Nếu bầu cử thành công và proof hợp lệ, tiếp tục
         setIsSuccessModalVisible(true);
