@@ -36,7 +36,7 @@ def save_hash_to_file(hash_value):
 def main():
     # 5 bộ cccd và otp khác nhau
     test_cases = [
-        {"cccd": 1, "otp": 123},
+        {"cccd": 123123123, "otp": 456456456},
     ]
     
     # Tính toán Poseidon hash cho mỗi cặp cccd và otp
