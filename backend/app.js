@@ -2,7 +2,7 @@ const express = require("express");
 const snarkjs = require("snarkjs");
 const connectDB = require("./config/db");
 const Candidate = require("./models/CandidateModel.js");
-const verificationKey = require("./circuits/verificationKey.json"); 
+const verificationKey = require("./circuits/verification_key.json"); 
 
 const app = express()
 connectDB();
